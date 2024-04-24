@@ -11,13 +11,15 @@ To run this project locally, you'll need:
 - PostgreSQL database.
 - Node.js v20 or higher.
 
-### Setup db
-1. Create a new database called `vendure` in your PostgreSQL server.
-2. Restore the backup `sampledata.sql.gz` from the `pim` directory.
- 
-### Configure Vendure and Storefront
-1. Rename `.env.example` in `pim` to `.env` and change values for your local PostgreSQL database.
-2. Rename `.env.example` in `storefront` to `.env` and change values for your local Vendure server.
+### Setup
+1. Pull this repo locally
+2. CD into `pim` and run `npm install`
+3. CD into `storefront` and run `npm install`
+4. Create a new database called `vendure` in your PostgreSQL server.
+5. CD into `pim`
+6. Run `npm run populate` to fill the database with sample data.
+7. Rename `.env.example` in `pim` to `.env` and change values for your local PostgreSQL database.
+8. Rename `.env.example` in `storefront` to `.env` and change values for your local Vendure server.
 
 ### Running Locally
 Ensure your PostgreSQL database is up and running. Then, follow these steps:

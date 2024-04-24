@@ -1,6 +1,8 @@
+import type {Query} from "../../types/query.ts";
+
 const gqlShopURL = import.meta.env.PUBLIC_SHOPAPI;
 
-export const createQuery = async ({ query, variables }) => {
+export const createQuery = async ({ query, variables }: Query) => {
   let headers = { "Content-Type": "application/json" };
   const response = await fetch(gqlShopURL, {
     method: "POST",

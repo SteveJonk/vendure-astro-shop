@@ -1,3 +1,6 @@
+// @ts-nocheck
+// TODO: Add types for all actions <- Just a hackathon, no time for this
+
 import { createQuery } from "../utils/server/gqlClient";
 import { OrderSchema, CustomerSchema } from "./schema";
 
