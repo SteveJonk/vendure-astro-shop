@@ -1,10 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
----
+import { getProducts } from "../api/server";
+import Card from "../components/Card.astro";
 
+const { products } = await getProducts(50);
+
+export const prerender = false;
+---
+<script define:vars={{products}}>console.log(products.items[0])</script>
 <Layout title="My lil Shop">
 	<main>
-
+		<h1>My lil Shop</h1>
+		<div class="productGrid">
+			{products?.items.map(product => (
+				<Card title={product.name} body={product.description} href={`product/${product.slug}`}/>
+			))}
+		</div>
 	</main>
 </Layout>
 
@@ -12,12 +23,13 @@ import Layout from '../layouts/Layout.astro';
 	main {
 		margin: auto;
 		padding: 1rem;
-		width: 800px;
-		max-width: calc(100% - 2rem);
+		width: 1200px;
+		max-width: 100%;
 		color: white;
 		font-size: 20px;
 		line-height: 1.6;
 	}
+
 	h1 {
 		font-size: 4rem;
 		font-weight: 700;
@@ -25,4 +37,15 @@ import Layout from '../layouts/Layout.astro';
 		text-align: center;
 		margin-bottom: 1em;
 	}
+
+	.productGrid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(300px, 1fr));
+		gap: 1rem;
+
+		@media (max-width: 800px) {
+			grid-template-columns: repeat(1, minmax(300px, 1fr));
+		}
+	}
+
 </style>

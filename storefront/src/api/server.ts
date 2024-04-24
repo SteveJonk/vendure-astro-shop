@@ -77,12 +77,13 @@ export async function getMe(cookie) {
   );
 }
 
-export async function getProducts(take) {
+export async function getProducts(take): Promise<{products: {items: unknown[], totalItems: number}}> {
   return await createQuery({
     query: `
         query {
           products(options: {
             take: ${take}
+            skip: 0
           }) {
             totalItems
             items {
