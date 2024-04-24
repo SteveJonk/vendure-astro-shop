@@ -9,7 +9,8 @@
     "build": "tsc",
     "start:server": "node ./dist/index.js",
     "start:worker": "node ./dist/index-worker.js",
-    "start": "concurrently npm:start:*"
+    "start": "concurrently npm:start:*",
+    "populate": "ts-node ./src/populate-sample-data.ts"
   },
   "dependencies": {
     "@vendure/admin-ui-plugin": "2.2.0",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@vendure/cli": "2.2.0",
+    "@vendure/create": "^2.2.0",
     "concurrently": "8.2.2"
   }
 }
