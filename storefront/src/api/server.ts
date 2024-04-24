@@ -111,6 +111,34 @@ export async function getProducts(take): Promise<{products: {items: unknown[], t
   });
 }
 
+export async function getProduct (slug: string) {
+  return await createQuery({
+    query: `
+    query {
+      product(slug: "${slug}") {
+        id
+        name
+        description
+        slug
+        assets {
+          preview
+        }
+        featuredAsset {
+          width
+          height
+          source
+        }
+        variants {
+          id
+          name
+          price
+        }
+      }
+    }
+    `,
+  });
+}
+
 export async function login({ username, password, rememberMe }) {
   console.log("argument", username, password, rememberMe);
   return await createQuery({

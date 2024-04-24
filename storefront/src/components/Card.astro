@@ -3,17 +3,21 @@ interface Props {
 	title: string;
 	body: string;
 	href: string;
+	price: string;
+	imgSrc: string;
 }
 
-const { href, title, body } = Astro.props;
+const { href, title, body, imgSrc, price } = Astro.props;
 ---
 
 <li class="link-card">
 	<a href={href}>
+		<img src={imgSrc} alt={`product image for ${title}`} />
 		<h2>
 			{title}
 			<span>&rarr;</span>
 		</h2>
+		<p class="price">{price}</p>
 		<p>
 			{body}
 		</p>
@@ -42,9 +46,21 @@ const { href, title, body } = Astro.props;
 		background-color: #23262d;
 		opacity: 0.8;
 	}
+
+	.price {
+		font-size: 18px;
+		color: rgb(var(--accent-light));
+	}
+
+	img {
+		margin-bottom: 10px;
+		aspect-ratio: 3/2;
+		object-fit: cover;
+	}
+
 	h2 {
 		margin: 0;
-		font-size: 1.25rem;
+		font-size: 1.5rem;
 		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 	p {

@@ -1,0 +1,45 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import {getProduct} from "../../api/server";
+
+const { slug } = Astro.params;
+const { product } = await getProduct(slug);
+const { name, description, featuredAsset, images } = product;
+console.log(featuredAsset)
+
+---
+
+<Layout title="My lil Shop">
+    <main>
+        <div class="breadcrumbs">
+            <a href="/">Home</a> / <p>{name}</p>
+        </div>
+        <img src={featuredAsset.source} width={featuredAsset.width} height={featuredAsset.height} alt={`product image for ${name}`} />
+        <h1>{name}</h1>
+        <p>{description}</p>
+    </main>
+
+</Layout>
+
+<style>
+    h1{
+        font-size: 2rem;
+        margin: 20px 0;
+    }
+    main {
+        margin-bottom: 30px;
+    }
+
+    img {
+        border-radius: 20px;
+    }
+
+    .breadcrumbs {
+        display: flex;
+        font-size: 16px;
+        gap: 5px;
+        font-weight: 300;
+        margin-bottom: 20px;
+    }
+
+</style>

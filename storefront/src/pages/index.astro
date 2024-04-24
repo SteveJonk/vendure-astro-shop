@@ -1,34 +1,25 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getProducts } from "../api/server";
 import Card from "../components/Card.astro";
+import { getProducts } from "../api/server";
+import {formatPrice} from "../utils/price";
 
-const { products } = await getProducts(50);
-
-export const prerender = false;
+const { products } = await getProducts(51);
 ---
-<script define:vars={{products}}>console.log(products.items[0])</script>
+
 <Layout title="My lil Shop">
 	<main>
 		<h1>My lil Shop</h1>
 		<div class="productGrid">
 			{products?.items.map(product => (
-				<Card title={product.name} body={product.description} href={`product/${product.slug}`}/>
+				<Card title={product.name} body={product.description} price={formatPrice(product.variants[0].price)} href={`product/${product.slug}`} imgSrc={product.featuredAsset?.preview}/>
 			))}
 		</div>
 	</main>
 </Layout>
 
 <style>
-	main {
-		margin: auto;
-		padding: 1rem;
-		width: 1200px;
-		max-width: 100%;
-		color: white;
-		font-size: 20px;
-		line-height: 1.6;
-	}
+
 
 	h1 {
 		font-size: 4rem;
@@ -40,10 +31,14 @@ export const prerender = false;
 
 	.productGrid {
 		display: grid;
-		grid-template-columns: repeat(2, minmax(300px, 1fr));
+		grid-template-columns: repeat(3, minmax(300px, 1fr));
 		gap: 1rem;
 
-		@media (max-width: 800px) {
+		@media (max-width: 1000px) {
+			grid-template-columns: repeat(2, minmax(300px, 1fr));
+		}
+
+		@media (max-width: 700px) {
 			grid-template-columns: repeat(1, minmax(300px, 1fr));
 		}
 	}
